@@ -18,6 +18,6 @@ npm test
 ```
 
 ### Project at version 0.0.0
-### Underconstruction
+### Under construction
 
 Following Code School ExpressTD LivingCode
