@@ -4,13 +4,15 @@
   "description": "Example using Express with TDD",
   "main": "app.js",
   "scripts": {
-    "test": "mocha tests/test.js"
+    "test": "NODE_ENV=test mocha -w app.js tests/test.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "hiredis": "^0.5.0",
+    "redis": "^2.7.0"
   },
   "devDependencies": {
     "mocha": "^3.2.0",
