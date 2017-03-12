@@ -64,7 +64,14 @@ describe('Creating new cities', () => {
             .post('/cities')
             .send('name=Springfield&description=where+the+simpsons+live')
             .expect(/springfield/i, done)
-    })
+    });
+
+    it('Validades city name and description',(done) => {
+        request(app)
+            .post('/cities')
+            .send('name=&description=')
+            .expect(400, done);
+    });
 });
 
 describe('Deleting cities', () => {
