@@ -54,7 +54,10 @@ router.route('/:name')
     .get((req, res) => {
         client.hget('cities', req.params.name, (error, description) => {
             res.render('show.ejs', {
-                city: { name: req.params.name, description: description }
+                city: { 
+                    name: req.params.name, 
+                    description: description 
+                }
             });
         });
     });
