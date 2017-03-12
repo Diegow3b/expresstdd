@@ -66,3 +66,21 @@ describe('Creating new cities', () => {
             .expect(/springfield/i, done)
     })
 });
+
+describe('Deleting cities', () => {
+
+    before(() => {
+        client.hset('cities', 'Banana', 'a tasty fruit');
+    });
+
+    after(() => {
+        client.flushdb();
+    });
+    
+
+    it('Returns a 204 status code', (done) => {
+        request(app)
+            .delete('/cities/Banana')
+            .expect(204, done);            
+    });
+});

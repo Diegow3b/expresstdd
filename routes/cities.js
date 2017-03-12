@@ -21,40 +21,40 @@ if (process.env.REDISTOGO_URL) {
 var router = express.Router();
 
 router.route('/')
-    .get((request, response) => {
+    .get((req, res) => {
         client.hkeys('cities', (error, names) => {
             if (error) throw error;
 
-            response.json(names);
+            res.json(names);
         });
     })
 
-    .post(urlencode, (request, response) => {
-        var newCity = request.body;
+    .post(urlencode, (req, res) => {
+        var newCity = req.body;
         if (!newCity.name || !newCity.description) {
-            response.sendStatus(400);
+            res.sendStatus(400);
             return false;
         }
         client.hset('cities', newCity.name, newCity.description, (error) => {
             if (error) throw error;
 
-            response.status(201).json(newCity.name);
+            res.status(201).json(newCity.name);
         });
     });
 
 
 router.route('/:name')
-    .delete((request, response) => {
-        client.hdel('cities', request.params.name, (error) => {
+    .delete((req, res) => {
+        client.hdel('cities', req.params.name, (error) => {
             if (error) throw error;
-            response.sendStatus(204);
+            res.sendStatus(204);
         });
     })
 
-    .get((request, response) => {
-        client.hget('cities', request.params.name, (error, description) => {
-            response.render('show.ejs', {
-                city: { name: request.params.name, description: description }
+    .get((req, res) => {
+        client.hget('cities', req.params.name, (error, description) => {
+            res.render('show.ejs', {
+                city: { name: req.params.name, description: description }
             });
         });
     });
